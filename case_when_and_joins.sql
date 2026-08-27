@@ -1,0 +1,62 @@
+-- Categorize products based on unit price
+SELECT 
+    PRODUCT_NAME,
+    UNIT_PRICE,
+    CASE
+        WHEN UNIT_PRICE >= 1000 THEN 'High Price'
+        WHEN UNIT_PRICE >= 500 THEN 'Medium Price'
+        ELSE 'Low Price'
+    END AS PRICE_CATEGORY
+FROM SALES_TRANSACTIONS;
+
+
+-- Categorize transactions based on quantity
+SELECT
+    PRODUCT_NAME,
+    QUANTITY,
+    CASE
+        WHEN QUANTITY >= 10 THEN 'High Quantity'
+        WHEN QUANTITY >= 5 THEN 'Medium Quantity'
+        ELSE 'Low Quantity'
+    END AS QUANTITY_CATEGORY
+FROM SALES_TRANSACTIONS;
+
+
+-- Calculate total amount for each transaction
+SELECT
+    PRODUCT_NAME,
+    QUANTITY,
+    UNIT_PRICE,
+    QUANTITY * UNIT_PRICE AS TOTAL_AMOUNT
+FROM SALES_TRANSACTIONS;
+
+
+-- Categorize sales performance
+SELECT
+    PRODUCT_NAME,
+    QUANTITY * UNIT_PRICE AS TOTAL_AMOUNT,
+    CASE
+        WHEN QUANTITY * UNIT_PRICE >= 5000 THEN 'High Sales'
+        WHEN QUANTITY * UNIT_PRICE >= 2000 THEN 'Medium Sales'
+        ELSE 'Low Sales'
+    END AS SALES_CATEGORY
+FROM SALES_TRANSACTIONS;
+
+
+-- Find total sales by payment mode
+SELECT
+    PAYMENT_MODE,
+    SUM(QUANTITY * UNIT_PRICE) AS TOTAL_SALES
+FROM SALES_TRANSACTIONS
+GROUP BY PAYMENT_MODE
+ORDER BY TOTAL_SALES DESC;
+
+
+-- Find total sales by city and payment mode
+SELECT
+    CITY,
+    PAYMENT_MODE,
+    SUM(QUANTITY * UNIT_PRICE) AS TOTAL_SALES
+FROM SALES_TRANSACTIONS
+GROUP BY CITY, PAYMENT_MODE
+ORDER BY TOTAL_SALES DESC;
