@@ -1,0 +1,57 @@
+-- ADVANCED FILTERING
+
+
+-- Products with price between 500 and 2000
+SELECT
+    PRODUCT_NAME,
+    UNIT_PRICE
+FROM SALES_TRANSACTIONS
+WHERE UNIT_PRICE BETWEEN 500 AND 2000;
+
+
+-- Transactions from selected cities
+SELECT
+    PRODUCT_NAME,
+    CITY,
+    UNIT_PRICE
+FROM SALES_TRANSACTIONS
+WHERE CITY IN ('Mumbai', 'Ahmedabad', 'Delhi');
+
+
+-- Transactions excluding selected cities
+SELECT
+    PRODUCT_NAME,
+    CITY
+FROM SALES_TRANSACTIONS
+WHERE CITY NOT IN ('Mumbai', 'Ahmedabad');
+
+
+-- Products beginning with A
+SELECT
+    PRODUCT_NAME
+FROM SALES_TRANSACTIONS
+WHERE PRODUCT_NAME LIKE 'A%';
+
+
+-- Products ending with e
+SELECT
+    PRODUCT_NAME
+FROM SALES_TRANSACTIONS
+WHERE PRODUCT_NAME LIKE '%e';
+
+
+-- Products containing "Phone"
+SELECT
+    PRODUCT_NAME
+FROM SALES_TRANSACTIONS
+WHERE PRODUCT_NAME LIKE '%Phone%';
+
+
+-- Distinct cities
+SELECT DISTINCT CITY
+FROM SALES_TRANSACTIONS;
+
+
+-- Distinct payment modes
+SELECT DISTINCT PAYMENT_MODE
+FROM SALES_TRANSACTIONS;
